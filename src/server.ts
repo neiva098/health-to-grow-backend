@@ -1,11 +1,15 @@
 import app from './app';
 
-const PORT = process.env.PORT || 3000;
+import connect from './database/connection/connection';
 
-app.listen(PORT, () => {
-    console.log(`Health to Grow running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 3333;
 
-process.on('unhandledRejection', (reason, promise) => {
-    console.log(`Unhandled Rejection at: ${reason}`);
-});
+async function startServer() {
+    connect();
+
+    app.listen(PORT, () => {
+        console.log(`Health to Grow running on port ${PORT}`);
+    });
+}
+
+startServer();

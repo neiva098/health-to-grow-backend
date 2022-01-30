@@ -1,17 +1,26 @@
 {
     "compilerOptions": {
-        "experimentalDecorators": true,
+        "lib": [
+            "es5",
+            "es6"
+        ],
         "module": "commonjs",
         "moduleResolution": "node",
         "pretty": true,
         "strict": true,
+        "strictPropertyInitialization": false,
         "sourceMap": true,
-        "target": "ES2019",
+        "target": "ES2017",
         "outDir": "./dist",
         "baseUrl": "./lib",
         "esModuleInterop": true,
-        "strictPropertyInitialization": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
     },
-    "include": ["src/**/*.ts"],
-    "exclude": ["node_modules"]
+    "include": [
+        "src/**/*.ts",
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }

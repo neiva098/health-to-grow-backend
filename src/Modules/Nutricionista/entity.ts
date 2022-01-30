@@ -1,9 +1,9 @@
-import { Entity } from 'typeorm';
 import { Profissional } from '../Profissional/entity';
+import { Entity } from 'typeorm';
 import { CREDENTIAL_TYPE, PROFISSIONAL_TYPE } from '../Profissional/enums';
 
-@Entity('personais')
+@Entity('nutricionistas')
 export class Personal extends Profissional {
-    credentialType = CREDENTIAL_TYPE.personal;
-    type = PROFISSIONAL_TYPE.personal;
+    credentialType = CREDENTIAL_TYPE.nutricionista;
+    type = PROFISSIONAL_TYPE.nutricionista;
 }
