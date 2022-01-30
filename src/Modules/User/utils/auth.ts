@@ -11,7 +11,7 @@ export const authenticate = async (
     if (!(await user.compareHash(password)))
         throw new HttpError(403, 'User not authorized');
 
-    return Object.assign(user, { token: user.generateToken() });
+    return Object.assign(user, { token: user.generateToken(), password: undefined });
 };
 
 export const authMidleware = async (
