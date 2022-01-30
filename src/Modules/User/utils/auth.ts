@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { promisify } from 'util';
 import jwt from 'jsonwebtoken';
 import { User } from '../entity';
-import { HttpError } from '../../../utils/errors';
+import { HttpError } from '../../../System/utils/errors';
 
 export const authenticate = async (
     user: User,

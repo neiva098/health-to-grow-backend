@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import { Controller } from '../../System/controllet';
-import { HttpError } from '../../utils/errors';
+import { HttpError } from '../../System/utils/errors';
 import { User } from './entity';
 import { IAuth } from './interfaces';
 import { authenticate } from './utils/auth';

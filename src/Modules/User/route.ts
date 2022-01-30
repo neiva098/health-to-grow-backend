@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { getValidData } from '../../utils/validators';
+import { getValidData } from '../../System/utils/validators';
 import controller from './controller';
 import * as validators from './utils/validators';
 

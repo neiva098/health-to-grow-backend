@@ -8,7 +8,7 @@ require('express-async-errors');
 
 import routes from './System/route';
 
-import { HttpError } from './utils/errors';
+import { HttpError } from './System/utils/errors';
 
 class App {
     public app: express.Application;
