@@ -1,0 +1,9 @@
+POST /api/users/auth HTTP/1.1
+Content-Type: application/json
+Host: localhost:3333
+Content-Length: 2115
+
+{
+    "email": "teste@gmail.com",
+    "password": "senhaDeTeste"
+}

@@ -1,7 +1,7 @@
-import { Column } from 'typeorm';
+import { Column, JoinColumn, OneToOne } from 'typeorm';
 import { User } from '../User/entity';
 
-export class Profissional extends User {
+export class Profissional {
     @Column({ nullable: false })
     credential: string;
 
@@ -10,4 +10,14 @@ export class Profissional extends User {
 
     @Column({ nullable: false })
     type: string;
+
+    @OneToOne(() => User, user => user.id, {
+        primary: true,
+        onDelete: 'CASCADE',
+    })
+    @JoinColumn({ name: 'id' })
+    pessoa: User;
+
+    @Column('uuid', { nullable: false, primary: true })
+    codigoPessoa: string;
 }

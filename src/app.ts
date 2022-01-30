@@ -2,11 +2,13 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
-import routes from './System/route';
+import { ValidationError } from 'yup';
 
 require('express-async-errors');
 
-import { HttpError, ValidateError } from './utils/errors';
+import routes from './System/route';
+
+import { HttpError } from './utils/errors';
 
 class App {
     public app: express.Application;
@@ -28,7 +30,7 @@ class App {
     }
 
     private static errorHandling(
-        error: Error | HttpError | ValidateError,
+        error: Error | HttpError | ValidationError,
         req: Request,
         res: Response,
         next: NextFunction,

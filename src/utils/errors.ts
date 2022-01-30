@@ -1,5 +1,4 @@
-import * as yup from 'yup';
-const RandExp = require('randexp');
+import { ValidationError } from 'express-validator';
 
 export class HttpError extends Error {
     statusCode: number;
@@ -13,38 +12,12 @@ export class HttpError extends Error {
     }
 }
 
-export const generateRegexExample = (err: any) => {
-    let example: typeof RandExp | undefined;
+export class ValidatorError extends HttpError {
+    errors: ValidationError[];
 
-    if (err.type == 'matches') {
-        example = new RandExp(err.params?.regex);
-    }
+    constructor(errors: ValidationError[]) {
+        super(400, 'Bad Request');
 
-    return example?.gen();
-};
-
-export class ValidateError extends HttpError {
-    errors: { msg: string; param: string; example: string }[];
-
-    constructor(error: yup.ValidationError) {
-        super(400, 'Validation Error');
-
-        this.errors = error.inner.map((err: any) => {
-            return {
-                msg: this.buildMessage(err),
-                param: err.path!,
-                example: generateRegexExample(err),
-            };
-        });
-    }
-
-    protected buildMessage(err?: any) {
-        return err.errors.join(', ');
-    }
-}
-
-export class BranchValidateError extends ValidateError {
-    protected buildMessage() {
-        return 'Dados da filial inválidos';
+        this.errors = errors;
     }
 }

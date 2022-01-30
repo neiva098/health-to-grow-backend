@@ -1,7 +1,14 @@
-import { PrimaryGeneratedColumn, Column, BeforeUpdate, BeforeInsert } from 'typeorm';
+import {
+    PrimaryGeneratedColumn,
+    Column,
+    BeforeUpdate,
+    BeforeInsert,
+    Entity,
+} from 'typeorm';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+@Entity('users')
 export class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
