@@ -1,0 +1,22 @@
+POST /api/atletas HTTP/1.1
+Content-Type: application/json
+Host: localhost:3333
+Content-Length: 2115
+
+{
+    "pessoa": {
+        "name": "luis filipe",
+        "email": "teste2@gmail.com",
+        "password": "senhaDeTeste"
+    },
+    "consultas": [
+        {
+            "dateTime": "2022-02-01T02:51:47.383Z",
+            "codigoEspecialista": "dd702108-e48f-4de8-ab3b-590c4e4f4545"
+        },
+        {
+            "dateTime": "2022-02-01T02:51:47.383Z",
+            "codigoEspecialista": "bcff3a05-ef59-4710-80c2-872f7e78fdfd"
+        }
+    ]
+}

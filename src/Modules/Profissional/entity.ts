@@ -1,6 +1,8 @@
-import { Column, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { Consulta } from '../Consultas/entity';
 import { User } from '../User/entity';
 
+@Entity('profissionais')
 export class Profissional {
     @Column({ nullable: false })
     credential: string;
@@ -15,8 +17,13 @@ export class Profissional {
         primary: true,
         onDelete: 'CASCADE',
     })
-    @JoinColumn({ name: 'id' })
+    @JoinColumn({ name: 'codigoPessoa' })
     pessoa: User;
+
+    @OneToMany(() => Consulta, consulta => consulta.specialist, {
+        onDelete: 'CASCADE',
+    })
+    consultas: Consulta[];
 
     @Column('uuid', { nullable: false, primary: true })
     codigoPessoa: string;

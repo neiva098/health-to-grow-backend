@@ -35,6 +35,7 @@ class App {
         res: Response,
         next: NextFunction,
     ) {
+        console.log(error);
         const { statusCode, message, errors, code } = <any>error;
 
         const apiError = {

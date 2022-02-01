@@ -1,15 +1,20 @@
 import { Request, Response, Router } from 'express';
 import { getValidData } from '../../System/utils/validators';
 import controller from './controller';
+import * as validators from './validators';
 
 const AtletaRouter = Router();
 
-AtletaRouter.post('/auth', async (req: Request, res: Response) => {
-    const { body } = getValidData(req);
+AtletaRouter.post(
+    '/',
+    validators.createAtletaValidator,
+    async (req: Request, res: Response) => {
+        const { body } = getValidData(req);
 
-    const response = await controller.create(body);
+        const response = await controller.create(body);
 
-    return res.status(200).send(response);
-});
+        return res.status(200).send(response);
+    },
+);
 
 export default AtletaRouter;

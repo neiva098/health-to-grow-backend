@@ -4,9 +4,12 @@ import {
     BeforeUpdate,
     BeforeInsert,
     Entity,
+    OneToOne,
 } from 'typeorm';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { Profissional } from '../Profissional/entity';
+import { Atleta } from '../Atleta/entity';
 
 @Entity('users')
 export class User {
@@ -21,6 +24,20 @@ export class User {
 
     @Column({ nullable: false })
     password: string;
+
+    @OneToOne(() => Profissional, profissional => profissional.pessoa, {
+        cascade: true,
+        onDelete: 'CASCADE',
+        eager: true,
+    })
+    profissionalProfile?: Profissional;
+
+    @OneToOne(() => Atleta, atleta => atleta.pessoa, {
+        cascade: true,
+        onDelete: 'CASCADE',
+        eager: true,
+    })
+    atletaProfile?: Atleta;
 
     public async compareHash(hash: string | Buffer): Promise<boolean> {
         return bcrypt.compare(hash, this.password);
