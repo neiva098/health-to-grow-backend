@@ -1,24 +1,32 @@
 import { ICreateUser } from './interfaces';
-import { EntityRepository, Repository } from 'typeorm';
+import { DeepPartial, EntityRepository, Repository, SaveOptions } from 'typeorm';
 import { Consulta } from '../Consultas/entity';
 import { User } from './entity';
 import { Atleta } from '../Atleta/entity';
 
 @EntityRepository(User)
 export default class UserRepository extends Repository<User> {
-    async insertOne(user: ICreateUser): Promise<User> {
-        const dbUser = await super.findOne({email: user.email})
+    async save<T extends DeepPartial<User>>(
+        entity: T,
+    ): Promise<T> {
+        const relatedEntity = await this.createRelatedEntity(entity)
 
-        const entity: User = {
-            ...user,
+        return await super.save(relatedEntity);
+    }
+
+    protected async createRelatedEntity<T extends DeepPartial<User>>(entity: T) {
+        const dbUser = await super.findOne({ email: entity.email });
+
+        return {
+            ...entity,
             id: dbUser?.id,
-            atletaProfile: user.atletaProfile ?  Object.assign(new Atleta(), {
-                consultas: user.atletaProfile?.consultas.map(consulta =>
-                    Object.assign(new Consulta(), consulta),
-                )
-            }): undefined,
-        } as any;
-
-        return await super.save(entity);
+            atletaProfile: entity.atletaProfile
+                ? Object.assign(new Atleta(), {
+                      consultas: entity.atletaProfile?.consultas?.map(consulta =>
+                          Object.assign(new Consulta(), consulta),
+                      ),
+                  })
+                : undefined,
+        };
     }
 }

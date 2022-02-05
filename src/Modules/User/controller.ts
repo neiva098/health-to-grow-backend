@@ -1,14 +1,13 @@
 import {  getCustomRepository, Repository } from 'typeorm';
 import { Controller } from '../../System/controllet';
 import { HttpError } from '../../System/utils/errors';
-import { Atleta } from '../Atleta/entity';
 import { User } from './entity';
 import { IAuth, ICreateUser } from './interfaces';
 import UserRepository from './repository';
 import { authenticate } from './utils/auth';
 
 class UserController extends Controller<User> {
-    protected getRepository(): Repository<any> {
+    protected getRepository(): UserRepository {
         return getCustomRepository(UserRepository);
     }
 
@@ -27,7 +26,7 @@ class UserController extends Controller<User> {
     }
 
     async create(user: ICreateUser) {
-        return this.getRepository().insertOne(user);
+        return this.getRepository().save(user);
     }
 }
 
