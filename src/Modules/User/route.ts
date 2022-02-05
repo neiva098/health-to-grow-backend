@@ -19,7 +19,7 @@ UserRouter.post(
 
 UserRouter.post(
     '/',
-    validators.createAtletaValidator,
+    validators.createUerValidator,
     async (req: Request, res: Response) => {
         const { body } = getValidData(req);
 

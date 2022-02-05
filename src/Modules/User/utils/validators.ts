@@ -1,3 +1,4 @@
+import { optionalObjectValidator } from './../../../System/utils/validators';
 import { body } from 'express-validator';
 import { atletaValidator } from '../../Atleta/validators';
 
@@ -12,7 +13,7 @@ export const userValidator = [
     body('email').isEmail(),
 ];
 
-export const createAtletaValidator = [
+export const createUerValidator = [
     ...userValidator,
-    ...atletaValidator('atletaProfile')
+    optionalObjectValidator(atletaValidator('atletaProfile'), 'atletaProfile'),
 ];

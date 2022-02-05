@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { validationResult, matchedData } from 'express-validator';
+import { validationResult, matchedData, ValidationChain, body } from 'express-validator';
 import { ValidatorError } from './errors';
 
 export const throwsIfNotValid = (req: Request): void => {
@@ -74,3 +74,15 @@ export const getMatchedParams = (req: Request): Record<string, unknown> => {
 
     return data;
 };
+
+export const optionalObjectValidator = (validators: ValidationChain[], path: string) => {
+    return body(path).custom(async (value, { req }) => {
+        if (!value) return true;
+
+        return await Promise.all(
+            validators.map(async validator =>
+                validator.run(req),
+            ),
+        );
+    })
+}
