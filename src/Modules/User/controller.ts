@@ -26,7 +26,12 @@ class UserController extends Controller<User> {
     }
 
     async create(user: ICreateUser) {
-        return this.getRepository().save(user);
+        const createdUser = await this.getRepository().save(user);
+    
+        return {
+            ...createdUser,
+            password: undefined
+        }
     }
 }
 
