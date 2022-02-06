@@ -28,14 +28,12 @@ export class User {
     @OneToOne(() => Profissional, profissional => profissional.pessoa, {
         cascade: true,
         onDelete: 'CASCADE',
-        eager: true,
     })
     profissionalProfile?: Profissional;
 
     @OneToOne(() => Atleta, atleta => atleta.pessoa, {
         cascade: true,
         onDelete: 'CASCADE',
-        eager: true,
     })
     atletaProfile?: Atleta;
 
