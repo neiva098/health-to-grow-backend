@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import AtletaRouter from '../Modules/Atleta/route';
+import ConsultaRouter from '../Modules/Consultas/route';
 import UserRouter from '../Modules/User/route';
 
 const routes = Router();
@@ -39,5 +40,6 @@ routes.get('/', (req: Request, res: Response) => {
 });
 routes.use('/api/users', UserRouter);
 routes.use('/api/atletas', AtletaRouter);
+routes.use('/api/consultas', ConsultaRouter)
 
 export default routes;
