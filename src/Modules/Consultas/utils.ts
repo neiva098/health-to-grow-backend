@@ -21,7 +21,7 @@ export const getAvaliable = (
             '15:00',
             '16:00',
             '17:00',
-        ].filter(dh => dh < data.toISOString().substring(11, 5)),
+        ].filter(dh => dh < data.toISOString().substring(11, 16)),
     });
 
     const avaliable: { data: string; horarios: string[] }[] = [];
@@ -65,7 +65,7 @@ export const getOccupeds = (
         const iso = new Date(consulta.dateTime).toISOString();
 
         const data = iso.substring(0, 10);
-        const horario = iso.substring(11, 5);
+        const horario = iso.substring(11, 16);
 
         const occuped = occupeds.find(oc => oc.data === data) || {
             data,
