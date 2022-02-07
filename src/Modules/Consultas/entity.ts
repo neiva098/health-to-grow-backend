@@ -13,7 +13,7 @@ export class Consulta {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'date', nullable: false })
+    @Column({ type: 'timestamp', nullable: false })
     dateTime: string;
 
     @ManyToOne(() => Profissional, specialist => specialist.consultas, {

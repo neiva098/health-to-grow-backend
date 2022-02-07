@@ -17,16 +17,16 @@ export default class UserRepository extends Repository<User> {
     protected async createRelatedEntity<T extends DeepPartial<User>>(entity: T) {
         const dbUser = await super.findOne({ email: entity.email });
 
-        return {
+        return Object.assign(new User(), {
             ...entity,
             id: dbUser?.id,
             atletaProfile: entity.atletaProfile
                 ? Object.assign(new Atleta(), {
                       consultas: entity.atletaProfile?.consultas?.map(consulta =>
-                          Object.assign(new Consulta(), consulta),
-                      ),
+                        Object.assign(new Consulta(), consulta),
+                        ),
                   })
                 : undefined,
-        };
+        });
     }
 }

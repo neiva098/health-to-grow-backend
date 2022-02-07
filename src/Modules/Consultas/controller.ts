@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 import { Controller } from '../../System/controllet';
 import { Consulta } from './entity';
+import { ICreateConsulta } from './interfaces';
 import { getAvaliable } from './utils';
 
 class ConsultaController extends Controller<Consulta> {
@@ -16,6 +17,10 @@ class ConsultaController extends Controller<Consulta> {
         });
 
         return getAvaliable(consultas);
+    }
+
+    public async createMany(consultas: ICreateConsulta[]) {
+        return await this.getRepository().save(consultas)
     }
 }
 
