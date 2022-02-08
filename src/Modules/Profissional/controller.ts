@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 import { Controller } from '../../System/controllet';
 import { Profissional } from './entity';
 import { PROFISSIONAL_TYPE } from './enums';
+import { IProfissional } from './interfaces';
 
 class ProfissionalController extends Controller<Profissional> {
     protected getRepository(): Repository<Profissional> {
@@ -14,6 +15,10 @@ class ProfissionalController extends Controller<Profissional> {
             relations: ['pessoa']
         })
     } 
+
+    public async create(data: IProfissional) {
+        return await this.getRepository().save(data)
+    }
 }
 
 const controller = new ProfissionalController();

@@ -17,5 +17,16 @@ ProfissionalRouter.get(
     },
 );
 
+ProfissionalRouter.post(
+    '/',
+    validators.create(),
+    async (req: Request, res: Response) => {
+        const { body } = getValidData(req);
+
+        const response = await controller.create(body);
+
+        return res.status(200).send(response);
+    },
+);
 
 export default ProfissionalRouter;

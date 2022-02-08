@@ -20,3 +20,20 @@ Content-Length: 2115
 		]
 	}
 }
+
+### Create personal
+POST /api/users HTTP/1.1
+Content-Type: application/json
+Host: localhost:3333
+Content-Length: 2115
+
+{
+	"name": "luis filipe",
+	"email": "teste-personal03@gmail.com",
+	"password": "senhaDeTeste",
+	"profissionalProfile": {
+		"type": "personal",
+		"credentialType": "CREF",
+		"credential": "abc"
+	}
+}

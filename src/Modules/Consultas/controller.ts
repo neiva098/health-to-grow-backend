@@ -22,6 +22,10 @@ class ConsultaController extends Controller<Consulta> {
     public async createMany(consultas: ICreateConsulta[]) {
         return await this.getRepository().save(consultas)
     }
+
+    public async createOne(consulta: ICreateConsulta) {
+        return await this.getRepository().save(consulta)
+    }
 }
 
 const controller = new ConsultaController();

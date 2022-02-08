@@ -1,3 +1,4 @@
+import { create as profissionalValidator} from './../../Profissional/validators';
 import { optionalObjectValidator } from './../../../System/utils/validators';
 import { body } from 'express-validator';
 import { atletaValidator } from '../../Atleta/validators';
@@ -16,4 +17,5 @@ export const userValidator = [
 export const createUerValidator = [
     ...userValidator,
     optionalObjectValidator(atletaValidator('atletaProfile'), 'atletaProfile'),
+    optionalObjectValidator(profissionalValidator('profissionalProfile'), 'profissionalProfile')
 ];
